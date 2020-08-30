@@ -1,0 +1,14 @@
+.js .js-animation {
+  animation: slideDown .500s ease-in reverse;
+}
+
+@keyframes slideDown {
+  to {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
