@@ -15,7 +15,10 @@
     <link rel="stylesheet" href="./assets/styles/components/button.css" />
     <link rel="stylesheet" href="./assets/styles/styles.css" />
 
-    <script> document.documentElement.className = ' js' </script>
+    <script>
+      document.documentElement.className = " js";
+      </script>
+      <script src="https://unpkg.com/feather-icons"></script>
   </head>
   <body>
     <div class="container">
@@ -23,29 +26,49 @@
         <a class="menu__logo" href="/">B<span class="green">o</span>letim</a>
       </header>
 
-
       <div class="content">
         <form class="form js-form">
+          <div class="form__item"></div>
+
           <div class="form__item">
-            <label for="name">Nome do Aluno</label>
-            <input class="input" id="name" type="text" name="name" onkeydown="handleMask.apply(this, 'name')">
-          </div>
-          <div class="form__item">
-            <label for="note1">Nota do 1º Bimestre</label>
-            <input class="input" id="note1" type="text" maxlength="2" name="note1" onkeydown="handleMask.apply(this, 'note')">
-          </div>
-          <div class="form__item">
-            <label for="note2">Nota do 2º Bimestre</label>
-            <input class="input" id="note2" type="number" name="note2" onkeydown="handleMask.apply(this, 'note')">
+            <label for="note">Notas</label>
+            <div class="form__group">
+              <input
+                class="input"
+                id="note"
+                type="text"
+                maxlength="2"
+                name="note"
+                onkeydown="handleMask.apply(this, 'note')"
+              />
+              <button
+                type="button"
+                class="button button--secondary js-button-add"
+              >
+                +
+              </button>
+            </div>
           </div>
 
-          <button class="button">Finalizar</button>
+          <button type="submit" class="button button--primary">Finalizar</button>
         </form>
       </div>
 
-      <div class="results__container js-results"></div>
+      <div class="results__container js-results">
+        <div class="results__header">
+          <div class="title">Resultado:</div>
+
+          <button type="button" class="button button--remove js-button-remove">
+            <i data-feather="trash-2"></i>
+          </button>
+        </div>
+        <ul class="results__content js-results-content"></ul>
+      </div>
     </div>
 
     <script src="/assets/js/scripts.js"></script>
+    <script>
+      feather.replace()
+    </script>
   </body>
 </html>

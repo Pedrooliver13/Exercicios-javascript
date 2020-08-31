@@ -1,5 +1,6 @@
 // Elabore um programa que lia 2 notas de um aluno em uma disciplina.
 // Calcule e informe a média das notas;
+
 const handleMask = {
   apply(input, func) {
     setTimeout(() => {
@@ -20,34 +21,95 @@ const handleMask = {
   },
 };
 
+
 function initBoletim() {
-  function handleBoletim(event) {
-    event.preventDefault();
+  let boletim = [];
 
-    this.getElement = (seletor) => document.querySelector(seletor);
+  function insertNotesValues() {
+    let note = document.querySelector("#note");
 
-    let name = this.getElement("#name").value,
-      note1 = +this.getElement("#note1").value,
-      note2 = +this.getElement("#note2").value;
+    if (note.value == "") {
+      alert("informe sua NOTA");
+      note.focus();
 
-    const media = (note1 + note2) / 2;
-    const passed = media >= 5 ? "Passou" : "Retido";
+      return;
+    }
 
-    let html = `
-    <div class="title">Olá <span class="green">${name}</span>, sua nota é:</div>
-    <ul class="results__content">
-      <li>Nota final: <span class="green">${media}</span></li>
-      <li>Resultado: <span class="green">${passed}</span></li>
-    </ul>
-  `;
+    let li = document.createElement("li");
+    boletim.push(note.value);
 
-    const content = this.getElement(".js-results");
+    boletim.forEach((item, index) => {
+      li.innerHTML = `Nota ${index + 1}º: <span class="green">${item}</span>`;
 
-    return (content.innerHTML = html);
+      insertElementsHtml(li);
+    });
+
+    return;
   }
 
+  function insertElementsHtml(item) {
+    let content = document.querySelector(".js-results");
+
+    content.querySelector('.js-results-content').classList.add("js-ativo");
+    content.querySelector('.js-results-content').appendChild(item);
+
+    return;
+  }
+
+  function removeElements() {
+    const ul = document.querySelector(".js-results-content");
+    const arrayChildrens = Array.from(ul.children);
+
+    if (arrayChildrens.length)
+      arrayChildrens.forEach((item) => {
+        ul.classList.remove('js-ativo');
+        ul.removeChild(item);
+        boletim.pop(item);
+      });
+
+    return
+  }
+
+  function handleBoletimValues(event) {
+    event.preventDefault();
+
+    if (boletim.length < 2) {
+      alert("Adicione pelo menos 2 notas");
+      note.focus();
+
+      return;
+    }
+
+    let total = 0;
+
+    boletim.forEach((item) => {
+      total += Number(item);
+    });
+
+    const media = (total / boletim.length).toFixed(1);
+    const passed = media >= 5 ? "Passou" : "Retido";
+
+    let li = document.createElement("li");
+    li.innerHTML = `
+    <li>Média <span class="green">${media}</span></li>
+    <li>Resultado: <span class="green">${passed}</span></li>
+  `;
+
+    insertElementsHtml(li);
+
+    return;
+  }
+
+  // valor total;
   const form = document.querySelector(".js-form");
-  form.addEventListener("submit", handleBoletim);
+  form.addEventListener("submit", handleBoletimValues);
+
+  // add note;
+  let buttonAdd = document.querySelector(".js-button-add");
+  buttonAdd.addEventListener("click", insertNotesValues);
+
+  let buttonRemove = document.querySelector(".js-button-remove");
+  buttonRemove.addEventListener("click", removeElements);
 }
 
 initBoletim();

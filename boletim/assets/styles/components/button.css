@@ -1,19 +1,22 @@
 /* button */
 .button {
-  max-width: 100%;
   width: 100%;
-
-  display: block;
-  font-weight: bold;
-  font-size: 1em;
   
-  background: linear-gradient(to right,#ffb86c, #ff5555);
-  color: #282a36;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+
+  flex: 1 2 0;
+  
+  font-weight: bold;
+  font-size: 1.1em;
+  
+  background: transparent;
+  color: #f8f8f2;
   
   cursor: pointer;
   
   padding: 8px 16px;
-  margin: 20px 0;
   
   border: 1px solid transparent;
   border-radius: 3.5px;
@@ -24,4 +27,18 @@
 
 .button:hover , .button:focus {
   border-color: #50fa7b;
+}
+
+.button.button--primary {
+  background: linear-gradient(to right,#ffb86c, #ff5555);
+  color: #282a36;
+}
+
+.button.button--secondary {
+  background: linear-gradient(to right,#ff79c6, #bd93f9);
+  color: #282a36;
+}
+
+.button.button--remove {
+  max-width: 60px;
 }
